@@ -6,6 +6,7 @@ module.exports =
         filename: "bundle.js",
     module:
         loaders: [
+            { test: /\.cjsx$/, loaders: ['coffee', 'cjsx']},
             { test: /\.coffee$/, loader: "coffee-loader" },
             { test: /\.(coffee\.md|litcoffee)$/, loader: "coffee-loader?literate" },
             { test: /\.css$/, loader: "style-loader!css-loader" },

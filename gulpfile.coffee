@@ -37,7 +37,6 @@ gulp.task 'compress:css', ->
 
 gulp.task 'bower', ->
   bower()
-    .pipe flatten()
     .pipe (gulp.dest 'lib')
 
 gulp.task 'sass', ->
