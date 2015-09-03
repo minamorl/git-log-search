@@ -3,7 +3,6 @@ del           = require 'del'
 bower         = require 'gulp-bower'
 uglify        = require 'gulp-uglify'
 gutil         = require 'gulp-util'
-sass          = require 'gulp-sass'
 runSequence   = require 'run-sequence'
 merge         = require 'merge'
 layout        = require 'gulp-layout'
@@ -37,18 +36,12 @@ gulp.task 'compress:css', ->
 
 gulp.task 'bower', ->
   bower()
-    .pipe (gulp.dest 'lib')
-
-gulp.task 'sass', ->
-  gulp.src('./sass/**/*.sass')
-    .pipe(sass().on('error', sass.logError))
-    .pipe(gulp.dest('./dist/css'))
 
 gulp.task 'default', ->
-  runSequence 'clean', 'bower', 'sass', 'build', 'webpack', 'serve'
+  runSequence 'clean', 'bower', 'build', 'webpack', 'compress', 'serve'
 
 gulp.task 'deploy', ->
-  runSequence 'clean', 'bower', 'sass', 'build', 'compress', 'webpack'
+  runSequence 'clean', 'bower', 'build', 'webpack', 'compress'
 
 gulp.task 'build:index', ->
   gulp.src "./templates/index.jade"
@@ -58,7 +51,7 @@ gulp.task 'build:index', ->
 gulp.task 'build', ['build:index', 'build:misc']
 
 gulp.task 'build:misc', ->
-  gulp.src(['lib/**/*', '*.html', 'css/**/*', 'js/**/*'], {base: "."})
+  gulp.src(['*.html', 'css/**/*', 'js/**/*'], {base: "."})
     .pipe (gulp.dest 'dist')
 
 gulp.task 'webpack', (callback) ->
@@ -74,7 +67,7 @@ gulp.task 'webpack', (callback) ->
 
 gulp.task 'serve', ->
   gulp.watch './sass/**/*.sass', ->
-    runSequence 'sass', 'compress'
+    runSequence 'webpack', 'compress'
   gulp.watch ['./templates/**/*.jade'], ->
     runSequence 'build', 'compress'
   gulp.src 'dist'

@@ -1,5 +1,4 @@
-require '../dist/lib/normalize.css/normalize.css'
-require '../dist/lib/octicons/octicons/octicons.css'
-require '../dist/css/main.css'
-
+require 'normalize.css/normalize.css'
+require 'octicons/octicons/octicons.css'
+require '../sass/main.sass'
 require './helloworld.cjsx'
