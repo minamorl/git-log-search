@@ -5,34 +5,30 @@ _     = require 'lodash'
 SearchBox = React.createClass
   getInitialState: ->
     textvalue: ""
+    results: []
+  componentDidMount: ->
+    $.getJSON "/api/data.json", {q: this.state.textvalue}, (data) =>
+      this.setState
+        results: data.results
   eventChange: (e) ->
     this.setState
       textvalue: e.target.value
+    $.getJSON "/api/data.json", {q: this.state.textvalue}, (data) =>
+      this.setState
+        results: data.results
   render: ->
     <div>
       <input type="text" value={this.state.textvalue} onChange={this.eventChange} />
-      <ListUI filterWord={this.state.textvalue} />
+      <ListUI filterWord={this.state.textvalue} results={this.state.results} />
     </div>
 
 ListUI = React.createClass
   
-  getInitialState: ->
-    results: []
-  componentDidMount: ->
-    $.getJSON "/data.json", (data) =>
-      this.setState
-        results: data
   render: ->
     <ul>
       {
-        filtered_results= []
-        for r, index in this.state.results
-          r.id = index
-          if r.summary.indexOf(this.props.filterWord) != -1 or this.props.filterWord==""
-            filtered_results.push r
-
-        for result in filtered_results
-          <ListElement key={result.id} data={result} />
+        for r, index in this.props.results
+          <ListElement key={index} data={r}/>
       }
     </ul>
 
