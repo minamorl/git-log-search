@@ -17,32 +17,34 @@ SearchBox = React.createClass
 ListUI = React.createClass
   
   getInitialState: ->
-    results: [
-      "text1",
-      "text2",
-      "text3",
-      "text4",
-    ]
+    results: []
   componentDidMount: ->
-    $.get "/data.txt", (data) =>
+    $.getJSON "/data.json", (data) =>
       this.setState
-        results: _.uniq(data.split("\n"))
+        results: data
   render: ->
     <ul>
       {
         filtered_results= []
-        for r in this.state.results
-          if r.indexOf(this.props.filterWord) != -1 or this.props.filterWord==""
+        for r, index in this.state.results
+          r.id = index
+          if r.summary.indexOf(this.props.filterWord) != -1 or this.props.filterWord==""
             filtered_results.push r
 
         for result in filtered_results
-          <ListElement key={result} word={result} />
+          <ListElement key={result.id} data={result} />
       }
     </ul>
 
 ListElement = React.createClass
   render:->
-    <li>{this.props.word}</li>
+    <li>
+      <div>{this.props.data.summary}</div>
+      <div className="detail">
+        <div className="commit-author">{this.props.data.author}</div>
+        <div className="project">{this.props.data.project}</div>
+      </div>
+    </li>
 
 React.render(
   <SearchBox />,

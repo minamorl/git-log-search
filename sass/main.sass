@@ -18,7 +18,7 @@ body
       
 
 header 
-  padding: 20px 0
+  padding: 20px 0 10px 0
   width: 100%
   text-align: center
   background-color: #FFFFFF
@@ -71,9 +71,21 @@ article
 
     li
       padding-left: 2px
-      height: 30px
+      height: 36px
       list-style-type: none
       border-bottom: 1px dotted #cccccc
+
+       
+      .detail
+        .commit-author
+          display:inline
+          color: #5c5c5c
+        .project
+          display:inline
+          &:before
+            content: " - "
+          color: #cc8888
+        font-size: 12px
 
 img
   max-width: 100%
