@@ -2,7 +2,7 @@ React = require 'react'
 
 SearchBox = React.createClass
   getInitialState: ->
-    textvalue: "aaa"
+    textvalue: ""
   eventChange: (e) ->
     this.setState
       textvalue: e.target.value
