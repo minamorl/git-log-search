@@ -51,7 +51,7 @@ gulp.task 'build:index', ->
 gulp.task 'build', ['build:index', 'build:misc']
 
 gulp.task 'build:misc', ->
-  gulp.src(['*.html', 'css/**/*', 'js/**/*'], {base: "."})
+  gulp.src(['*.txt', '*.html', 'css/**/*', 'js/**/*'], {base: "."})
     .pipe (gulp.dest 'dist')
 
 gulp.task 'webpack', (callback) ->

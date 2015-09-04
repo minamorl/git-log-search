@@ -1,4 +1,6 @@
 React = require 'react'
+$     = require 'jquery'
+_     = require 'lodash'
 
 SearchBox = React.createClass
   getInitialState: ->
@@ -21,6 +23,10 @@ ListUI = React.createClass
       "text3",
       "text4",
     ]
+  componentDidMount: ->
+    $.get "/data.txt", (data) =>
+      this.setState
+        results: _.uniq(data.split("\n"))
   render: ->
     <ul>
       {
