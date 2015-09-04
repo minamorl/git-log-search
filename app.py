@@ -11,11 +11,9 @@ def api_get_redis():
     if query == "":
         query = "*"
     else:
-        query = "*" + query + "*"
-
-    keys = itertools.islice(r.scan_iter(query), 10)
+        query = "*" + '*'.join(query.split(' ')) + "*"
+    keys = itertools.islice(r.scan_iter(query), 50)
     results = list(r.hgetall(key) for key in keys)
-    print(results)
     return jsonify(results=results)
 
 if __name__ == '__main__':
