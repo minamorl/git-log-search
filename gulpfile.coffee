@@ -70,6 +70,8 @@ gulp.task 'serve', ->
     runSequence 'webpack', 'compress'
   gulp.watch ['./templates/**/*.jade'], ->
     runSequence 'build', 'compress'
+  gulp.watch ['./app/**/*'], ->
+    runSequence 'webpack', 'compress'
   gulp.src 'dist'
     .pipe webserver
       livereload: true,

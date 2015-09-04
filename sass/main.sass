@@ -7,7 +7,6 @@ $link-color: #308ca8
 
 body 
   font-family: $font-family
-  background-color: #F5F5F5
 
   a
     color: $link-color
@@ -15,19 +14,16 @@ body
     &:hover
       text-decoration: underline
     &:visited
-      color: darken($link-color, 25%)
+      color: darken($link-color, 15%)
       
 
 header 
-  padding: 10px 0
-  border-bottom: 1px solid #cccccc
+  padding: 20px 0
   width: 100%
   text-align: center
   background-color: #FFFFFF
   a.logo 
-    font-size: 20px
-    font-family: "Abril Fatface", serif
-    color: $logo-color
+    font-size: 24px
     border: none
 
     text-decoration: none
@@ -57,10 +53,16 @@ article
     line-height: $article-main-font-size + 8px
   
 .content 
-  max-width: 1024px
+  max-width: 800px
   text-align:left
   margin-left: auto
   margin-right: auto
+
+  input
+    width: 100%
+    border: 1px solid #cccccc
+    border-radius: 5px
+    font-size: 20px
 
 img
   max-width: 100%
@@ -103,24 +105,3 @@ footer
       padding: 0 00px
       margin: 0 20px
       list-style-type: square
-
-
-pre 
-  code.hljs
-    display: block
-    background: #f6f6f6 none repeat scroll 0% 0%
-    color: #4D4D4C
-    font-family: Menlo,Monaco,Consolas,monospace
-    line-height: 1.5
-    border: 1px solid #CCC
-    border-radius: 4px
-    padding: 10px
-code
-    background: #f6f6f6 none repeat scroll 0% 0%
-    padding: 4px 8px
-    margin: 0 6px
-    color: #4D4D4C
-    font-family: Menlo,Monaco,Consolas,monospace
-    line-height: 1.5
-    border: 1px solid #CCC
-    border-radius: 4px
