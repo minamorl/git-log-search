@@ -16,6 +16,8 @@ cssmin        = require 'gulp-minify-css'
 webserver     = require 'gulp-webserver'
 webpack       = require 'webpack'
 flatten       = require 'gulp-flatten'
+process       = require('child_process')
+
 webpackConfig = require "./webpack.config.coffee"
 
 gulp.task 'clean', ->
@@ -38,7 +40,7 @@ gulp.task 'bower', ->
   bower()
 
 gulp.task 'default', ->
-  runSequence 'clean', 'bower', 'build', 'webpack', 'compress', 'serve'
+  runSequence 'clean', 'bower', 'build', 'webpack', 'compress', 'flask', 'serve'
 
 gulp.task 'deploy', ->
   runSequence 'clean', 'bower', 'build', 'webpack', 'compress'
@@ -79,3 +81,9 @@ gulp.task 'serve', ->
         source: '/api/data.json',
         target: 'http://localhost:5000/'
       ]
+
+gulp.task 'flask', ->
+  spawn = process.spawn
+  console.info 'Starting flask server'
+  PIPE = {stdio: 'inherit'}
+  spawn 'python', ['app.py'], PIPE
