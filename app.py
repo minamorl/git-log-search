@@ -12,7 +12,7 @@ def api_get_redis():
         query = "*"
     else:
         query = "*" + '*'.join(query.split(' ')) + "*"
-    keys = itertools.islice(r.scan_iter(query), 50)
+    keys = itertools.islice(r.scan_iter(query), 100)
     results = list(r.hgetall(key) for key in keys)
     return jsonify(results=results)
 
