@@ -77,6 +77,7 @@ gulp.task 'serve', ->
   gulp.src 'dist'
     .pipe webserver
       livereload: true,
+      host: "0.0.0.0",
       proxies:[
         source: '/api/data.json',
         target: 'http://localhost:5000/'
