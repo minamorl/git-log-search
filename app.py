@@ -4,14 +4,17 @@ import itertools
 app = Flask(__name__)
 
 
+REDIS_PREFIX = "gitsampler:commits:"
+
+
 @app.route('/')
 def api_get_redis():
     r = redis.StrictRedis(decode_responses=True)
     query = request.args.get('q', '')
     if query == "":
-        query = "*"
+        query = REDIS_PREFIX + "*"
     else:
-        query = "*" + '*'.join(query.split(' ')) + "*"
+        query = REDIS_PREFIX + "*" + '*'.join(query.split(' ')) + "*"
     keys = itertools.islice(r.scan_iter(query), 100)
     results = list(r.hgetall(key) for key in keys)
     return jsonify(results=results)
