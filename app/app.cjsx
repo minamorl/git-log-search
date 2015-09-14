@@ -42,7 +42,11 @@ ListElement = React.createClass
       </div>
     </li>
 
-React.render(
-  <SearchBox />,
-  document.getElementById 'searchbox'
-)
+init = ->
+  React.render(
+    <SearchBox />,
+    document.getElementById 'searchbox'
+  )
+
+$(document).ready ->
+  init()
