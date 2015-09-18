@@ -79,7 +79,7 @@ gulp.task 'serve', ->
       livereload: true,
       host: "0.0.0.0",
       proxies:[
-        source: '/api/data.json',
+        source: '/api/',
         target: 'http://localhost:5000/'
       ]
 
