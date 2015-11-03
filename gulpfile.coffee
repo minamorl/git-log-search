@@ -40,7 +40,8 @@ gulp.task 'bower', ->
   bower()
 
 gulp.task 'default', ->
-  runSequence 'clean', 'bower', 'build', 'webpack', 'compress', 'flask', 'serve'
+  # runSequence 'clean', 'bower', 'build', 'webpack', 'compress', 'flask', 'serve'
+  runSequence 'clean', 'bower', 'build', 'webpack', 'compress', 'serve'
 
 gulp.task 'deploy', ->
   runSequence 'clean', 'bower', 'build', 'webpack', 'compress'
@@ -83,8 +84,8 @@ gulp.task 'serve', ->
         target: 'http://localhost:5000/'
       ]
 
-gulp.task 'flask', ->
-  spawn = process.spawn
-  console.info 'Starting flask server'
-  PIPE = {stdio: 'inherit'}
-  spawn 'python', ['app.py'], PIPE
+# gulp.task 'flask', ->
+  # spawn = process.spawn
+  # console.info 'Starting flask server'
+  # PIPE = {stdio: 'inherit'}
+  # spawn 'python', ['app.py'], PIPE

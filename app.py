@@ -10,9 +10,9 @@ REDIS_PREFIX = "gitsampler:commits:"
 @app.route('/data.json')
 def api_get_redis():
     r = redis.StrictRedis(decode_responses=True)
-    query = request.args.get('q')
+    query = request.args.get('q', "")
 
-    if query is None:
+    if query == "":
         query = REDIS_PREFIX + "*"
     else:
         query = REDIS_PREFIX + "*" + '*'.join(query.split(' ')) + "*"
