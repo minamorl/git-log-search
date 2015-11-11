@@ -13,7 +13,7 @@ SearchBox = React.createClass
   eventChange: (e) ->
     this.setState
       textvalue: e.target.value
-    $.getJSON "/api/data.json", {q: this.state.textvalue}, (data) =>
+    $.getJSON "/api/data.json", {q: e.target.value}, (data) =>
       this.setState
         results: data.results
   render: ->
